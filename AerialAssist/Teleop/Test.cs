@@ -23,7 +23,14 @@ namespace HeroDemoBots.AerialAssist.Teleop
         {
             m_gamepad = new DragonGamePad();
 
+            RobotMap map = RobotMap.GetInstance();
 
+            m_leftDrive = new PWMSpeedController(map.GetLeftDriveMotorID());
+            m_rightDrive = new PWMSpeedController(map.GetRightDriveMotorID());
+
+            m_intake = new PWMSpeedController(map.GetIntakeMotorID());
+
+            m_kicker = new TalonSRX(map.GetKickerMotorID());
         }
 
         public void Run()
