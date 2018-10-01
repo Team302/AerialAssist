@@ -40,8 +40,9 @@ namespace HeroDemoBots.AerialAssist.Subsys
             m_motor.SetInverted( false );
         }
 
-        public void HoldKicker()
+        public void Hold()
         {
+            // TODO: need to look at encoder to see if it is in position, so we can stop the motor.
             RobotMap map = RobotMap.GetInstance();
             PneumaticControlModule pcm = PCM.GetInstance().GetPCM();
             pcm.SetSolenoidOutput(map.GetReleaseKickerSolenoidID(), false );
@@ -49,7 +50,7 @@ namespace HeroDemoBots.AerialAssist.Subsys
             m_motor.Set( CTRE.Phoenix.MotorControl.ControlMode.PercentOutput,  m_holdSpeed );
         }
 
-        public void SwingKicker()
+        public void Kick()
         {
             RobotMap map = RobotMap.GetInstance();
             PneumaticControlModule pcm = PCM.GetInstance().GetPCM();
