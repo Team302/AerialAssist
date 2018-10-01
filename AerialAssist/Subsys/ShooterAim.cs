@@ -46,19 +46,33 @@ namespace HeroDemoBots.AerialAssist.Subsys
             pcm.SetSolenoidOutput(map.GetLowerJawsSolenoidID(), false );
         }
 
-       //==============================================================================
-       /// <summary>
-       /// Method:         AimLow
-       /// Description:    Aim the shooter to the low position
-       /// </summary>
-       //==============================================================================
-       public void AimLow()
+        //==============================================================================
+        /// <summary>
+        /// Method:         AimMiddle
+        /// Description:    Aim the shooter to the middle position
+        /// </summary>
+        //==============================================================================
+        public void AimMiddle()
         {
             RobotMap map = RobotMap.GetInstance();
             PneumaticControlModule pcm = PCM.GetInstance().GetPCM();
-            pcm.SetSolenoidOutput(map.GetLiftJawsSolenoidID(), false );
-            pcm.SetSolenoidOutput(map.GetLowerJawsSolenoidID(), true );
+            pcm.SetSolenoidOutput(map.GetLiftJawsSolenoidID(), true);
+            pcm.SetSolenoidOutput(map.GetLowerJawsSolenoidID(), true);
         }
-        
+
+        //==============================================================================
+        /// <summary>
+        /// Method:         AimLow
+        /// Description:    Aim the shooter to the low position
+        /// </summary>
+        //==============================================================================
+        public void AimLow()
+        {
+            RobotMap map = RobotMap.GetInstance();
+            PneumaticControlModule pcm = PCM.GetInstance().GetPCM();
+            pcm.SetSolenoidOutput(map.GetLiftJawsSolenoidID(), false);
+            pcm.SetSolenoidOutput(map.GetLowerJawsSolenoidID(), true);
+        }
+
     }
 }
