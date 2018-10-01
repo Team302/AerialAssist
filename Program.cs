@@ -1,4 +1,4 @@
-﻿
+
 //====================================================================================================================================================
 // Copyright 2018 Lake Orion Robobitcs FIRST Team 302
 //
@@ -33,6 +33,17 @@ namespace AerialAssist
     {
         public static void Main()
         {
+            /*====================================================================
+             * Test harness to see of motors and solenoids are working
+             * =================================================================== */
+            Test test = new Test();
+            while ( true )
+            {
+                test.Run();
+            }
+            /*===================================================================
+             * This is the real code that will replace the test harness above
+             * ==================================================================
             ArcadeDrive drive = new ArcadeDrive();
             BallHandler mechanism = new BallHandler();
 
@@ -43,10 +54,11 @@ namespace AerialAssist
                 Watchdog.Feed();
 
                 drive.DriveWithJoysticks();
-                mechanism.ProcessTelopCommands();
+                mechanism.Run();
 
                 Thread.Sleep(20);
             }
+            =======================================================================*/
         }
     }
 }
