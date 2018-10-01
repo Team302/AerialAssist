@@ -28,54 +28,30 @@ namespace HeroDemoBots.AerialAssist.Subsys
     class Intake
     {
         private PWMSpeedController m_intake;
+        private float m_intakeSpeed = 1.0f;
+        private float m_expelSpeed = -1.0f;
+        private float m_stopSpeed = 0.0f;
 
         public Intake()
         {
-            //==================================================================
-            // Hardware Map
-            // Intake      PWM 8
-            //
-            // Solenoid 0 + 1 Lifter
-            // Solenoid 2 + 3 Open/Close Jaws
-            // Solenoid 5 Kicker
-            //
-            // Kicker CAN Talon with encode
-            //==================================================================
             RobotMap map = RobotMap.GetInstance();
             m_intake = new PWMSpeedController( map.GetIntakeMotorID() );
-        }
-
-        public void Lift()
-        {
-
-        }
-
-        public void Lower()
-        {
-
+            m_intake.SetInverted(false);
         }
 
         public void Run()
         {
+            m_intake.Set(m_intakeSpeed);
+        }
 
+        public void Expel()
+        {
+            m_intake.Set(m_expelSpeed);
         }
 
         public void Stop()
         {
-
-        }
-
-        public void Kick
-        (
-            bool  swingKicker        // <I> - % power for the left side ( range -1.0 to 1.0 )
-        )
-        {
-            float speed = 0.0f;
-            if ( swingKicker )
-            {
-                speed = 1.0f;
-            }
-            m_intake.Set( speed );
+            m_intake.Set(m_stopSpeed);
         }
     }
 }
