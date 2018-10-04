@@ -1,10 +1,16 @@
+
 using System;
+using System.Threading;
+using Microsoft.SPOT;
+using Microsoft.SPOT.Hardware;
+
 using CTRE.Phoenix;
 using CTRE.Phoenix.MotorControl;
 using CTRE.Phoenix.MotorControl.CAN;
+
 using HeroDemoBots.AerialAssist.Subsys;
 using HeroDemoBots.Common.Controllers;
-using Microsoft.SPOT;
+using CTRE.Phoenix.Controller;
 
 namespace HeroDemoBots.AerialAssist.Teleop
 {
@@ -12,8 +18,8 @@ namespace HeroDemoBots.AerialAssist.Teleop
     {
         private DragonGamePad m_gamepad;
 
-        private PWMSpeedController m_leftDrive;
-        private PWMSpeedController m_rightDrive;
+        private CTRE.Phoenix.MotorControl.PWMSpeedController m_leftDrive;
+        private CTRE.Phoenix.MotorControl.PWMSpeedController m_rightDrive;
 
         private PWMSpeedController m_intake;
 
@@ -21,22 +27,34 @@ namespace HeroDemoBots.AerialAssist.Teleop
 
         public Test()
         {
+
             m_gamepad = new DragonGamePad();
 
+            
             RobotMap map = RobotMap.GetInstance();
 
-            m_leftDrive = new PWMSpeedController(map.GetLeftDriveMotorID());
-            m_rightDrive = new PWMSpeedController(map.GetRightDriveMotorID());
+            m_leftDrive = new CTRE.Phoenix.MotorControl.PWMSpeedController(map.GetLeftDriveMotorID());
+            m_rightDrive = new CTRE.Phoenix.MotorControl.PWMSpeedController(map.GetRightDriveMotorID());
 
             m_intake = new PWMSpeedController(map.GetIntakeMotorID());
 
             m_kicker = new TalonSRX(map.GetKickerMotorID());
+            
         }
 
         public void Run()
         {
+//            GameController pad = new GameController(UsbHostDevice.GetInstance());
+//            Debug.Print( pad.GetAxis(AbstractLocalGamepad.kAxis_Leftx).ToString() );
+
+
+            
             RobotMap map = RobotMap.GetInstance();
             PneumaticControlModule pcm = PCM.GetInstance().GetPCM();
+
+            Debug.Print("Joystick values \n");
+            Debug.Print(m_gamepad.GetAxisValue(IDragonGamePad.AXIS_IDENTIFIER.LEFT_JOYSTICK_Y).ToString() );
+            Debug.Print(m_gamepad.GetAxisValue(IDragonGamePad.AXIS_IDENTIFIER.RIGHT_JOYSTICK_X).ToString() );
 
             m_leftDrive.Set((float)m_gamepad.GetAxisValue(IDragonGamePad.AXIS_IDENTIFIER.LEFT_JOYSTICK_Y));
             m_rightDrive.Set((float)m_gamepad.GetAxisValue(IDragonGamePad.AXIS_IDENTIFIER.RIGHT_JOYSTICK_Y));
@@ -49,7 +67,7 @@ namespace HeroDemoBots.AerialAssist.Teleop
             pcm.SetSolenoidOutput(3, m_gamepad.IsButtonPressed(IDragonGamePad.BUTTON_IDENTIFIER.Y_BUTTON));
             pcm.SetSolenoidOutput(4, m_gamepad.IsButtonPressed(IDragonGamePad.BUTTON_IDENTIFIER.LEFT_BUMPER));
             pcm.SetSolenoidOutput(5, m_gamepad.IsButtonPressed(IDragonGamePad.BUTTON_IDENTIFIER.RIGHT_BUMPER));
-
+            
 
 
         }
