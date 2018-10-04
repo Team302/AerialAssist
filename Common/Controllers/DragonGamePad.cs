@@ -35,8 +35,8 @@ namespace HeroDemoBots.Common.Controllers
     {
 
         private GameController m_gamepad;       /// controller 
-        private IButton[] m_buttonAr;           /// array of button objects that can be queried to see if they are pressed or not
-        private AnalogAxis[] m_axisAr;          /// array of axis objects that can be queried for values
+        private IButton[] m_buttonAr = new IButton[(int)IDragonGamePad.BUTTON_IDENTIFIER.MAX_BUTTONS];         /// array of button objects that can be queried to see if they are pressed or not
+        private AnalogAxis[] m_axisAr = new AnalogAxis[(int)IDragonGamePad.AXIS_IDENTIFIER.MAX_AXIS];          /// array of axis objects that can be queried for values
         
         
         //==================================================================================
