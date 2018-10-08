@@ -14,7 +14,11 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
+using Microsoft.SPOT.Hardware;
+
 using CTRE.Phoenix.MotorControl;
+
+using HeroDemoBots.Common.Hardware;
 
 
 namespace HeroDemoBots.AerialAssist.Subsys
@@ -35,6 +39,8 @@ namespace HeroDemoBots.AerialAssist.Subsys
         public Intake()
         {
             RobotMap map = RobotMap.GetInstance();
+
+            PWM pwmChannel = HeroPWM.StartPWM(map.GetIntakeMotorID());
             m_intake = new PWMSpeedController( map.GetIntakeMotorID() );
             m_intake.SetInverted(false);
         }
