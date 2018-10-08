@@ -16,9 +16,10 @@
 
 using System.Threading;
 
-using CTRE.Phoenix;
+using Microsoft.SPOT.Hardware;
 
 using HeroDemoBots.AerialAssist.Teleop;
+using HeroDemoBots.Common.Hardware;
 
 namespace AerialAssist
 {
@@ -33,32 +34,36 @@ namespace AerialAssist
     {
         public static void Main()
         {
+            // Start PWM Signals
+            PWM channel7 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin7);
+            PWM channel8 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin8);
+            PWM channel9 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin9);
+            
             /*====================================================================
              * Test harness to see of motors and solenoids are working
              * =================================================================== */
+            bool testHW = true;
+
             Test test = new Test();
-            while ( true )
-            {
-                test.Run();
-            }
-            /*===================================================================
-             * This is the real code that will replace the test harness above
-             * ==================================================================
+
             ArcadeDrive drive = new ArcadeDrive();
             BallHandler mechanism = new BallHandler();
 
-            // loop forever 
-            while (true)
+            while ( true )
             {
-                // keep feeding watchdog to enable motors 
-                Watchdog.Feed();
-
-                drive.DriveWithJoysticks();
-                mechanism.Run();
-
+                CTRE.Phoenix.Watchdog.Feed(); // keep feed the watchdow to enable the motors
+                if ( testHW )
+                {
+                    test.Run(Test.TEST_ID.RUN_LEFT_DRIVE);
+                }
+                else
+                {
+                    drive.DriveWithJoysticks();
+                    mechanism.Run();
+                }
                 Thread.Sleep(20);
+
             }
-            =======================================================================*/
         }
     }
 }
