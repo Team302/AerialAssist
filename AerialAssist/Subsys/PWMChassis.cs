@@ -15,8 +15,12 @@
 //====================================================================================================================================================
 
 
-using HeroDemoBots.Common.Utils;
+using Microsoft.SPOT.Hardware;
+
 using CTRE.Phoenix.MotorControl;
+
+using HeroDemoBots.Common.Utils;
+using HeroDemoBots.Common.Hardware;
 
 
 namespace HeroDemoBots.AerialAssist.Subsys
@@ -44,6 +48,9 @@ namespace HeroDemoBots.AerialAssist.Subsys
             // Kicker CAN Talon with encode
             //==================================================================
             RobotMap map = RobotMap.GetInstance();
+
+            PWM leftChannel = HeroPWM.StartPWM(map.GetLeftDriveMotorID());
+            PWM rightChannel = HeroPWM.StartPWM(map.GetRightDriveMotorID());
 
             m_leftDrive = new PWMSpeedController( map.GetLeftDriveMotorID() );
             m_rightDrive = new PWMSpeedController( map.GetRightDriveMotorID() );
