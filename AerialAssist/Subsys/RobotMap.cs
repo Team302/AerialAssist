@@ -14,6 +14,10 @@
 //====================================================================================================================================================
 
 
+using Microsoft.SPOT.Hardware;
+using CTRE.Phoenix.MotorControl;
+
+
 namespace HeroDemoBots.AerialAssist.Subsys
 {
     //==================================================================================
@@ -37,10 +41,10 @@ namespace HeroDemoBots.AerialAssist.Subsys
             return instance;
         }
 
-        private const int m_pwmLeftDrive = 9;
-        private const int m_pwmRightDrive = 7;
+        private static Cpu.PWMChannel m_pwmLeftDrive = CTRE.HERO.IO.Port3.PWM_Pin9;
+        private static Cpu.PWMChannel m_pwmRightDrive = CTRE.HERO.IO.Port3.PWM_Pin7;
 
-        private const int m_pwmIntake = 8;
+        private static Cpu.PWMChannel m_pwmIntake = CTRE.HERO.IO.Port3.PWM_Pin8;
 
         private const int m_canKicker = 1;
 
@@ -55,19 +59,19 @@ namespace HeroDemoBots.AerialAssist.Subsys
 
 
 
-        public Microsoft.SPOT.Hardware.Cpu.PWMChannel GetLeftDriveMotorID()
+        public Cpu.PWMChannel GetLeftDriveMotorID()
         {
-            return (Microsoft.SPOT.Hardware.Cpu.PWMChannel)m_pwmLeftDrive;
+            return m_pwmLeftDrive;
         }
 
-        public Microsoft.SPOT.Hardware.Cpu.PWMChannel GetRightDriveMotorID()
+        public Cpu.PWMChannel GetRightDriveMotorID()
         {
-            return (Microsoft.SPOT.Hardware.Cpu.PWMChannel)m_pwmRightDrive;
+            return m_pwmRightDrive;
         }
 
-        public Microsoft.SPOT.Hardware.Cpu.PWMChannel GetIntakeMotorID()
+        public Cpu.PWMChannel GetIntakeMotorID()
         {
-            return (Microsoft.SPOT.Hardware.Cpu.PWMChannel)m_pwmIntake;
+            return m_pwmIntake;
         }
 
         public int GetKickerMotorID()
