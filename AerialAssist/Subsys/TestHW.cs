@@ -1,9 +1,11 @@
-using System;
-using Microsoft.SPOT;
+
+using Microsoft.SPOT.Hardware;
 
 using CTRE.Phoenix;
 using CTRE.Phoenix.MotorControl;
 using CTRE.Phoenix.MotorControl.CAN;
+
+using HeroDemoBots.Common.Hardware;
 
 namespace HeroDemoBots.AerialAssist.Subsys
 {
@@ -20,9 +22,13 @@ namespace HeroDemoBots.AerialAssist.Subsys
         {
             RobotMap map = RobotMap.GetInstance();
 
+            PWM leftChannel = HeroPWM.StartPWM(map.GetLeftDriveMotorID());
             m_leftDrive = new PWMSpeedController(map.GetLeftDriveMotorID());
+
+            PWM rightChannel = HeroPWM.StartPWM(map.GetRightDriveMotorID());
             m_rightDrive = new PWMSpeedController(map.GetRightDriveMotorID());
 
+            PWM intakeChannel = HeroPWM.StartPWM(map.GetIntakeMotorID());
             m_intake = new PWMSpeedController(map.GetIntakeMotorID());
 
             m_kicker = new TalonSRX(map.GetKickerMotorID());
