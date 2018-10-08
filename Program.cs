@@ -34,17 +34,48 @@ namespace AerialAssist
     {
         public static void Main()
         {
-            // Start PWM Signals
-            PWM channel7 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin7);
-            PWM channel8 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin8);
-            PWM channel9 = HeroPWM.StartPWM(CTRE.HERO.IO.Port3.PWM_Pin9);
-            
             /*====================================================================
              * Test harness to see of motors and solenoids are working
              * =================================================================== */
             bool testHW = true;
 
             Test test = new Test();
+            Test.TEST_ID testId = Test.TEST_ID.RUN_LEFT_DRIVE;
+            /*
+            Test.TEST_ID testId = Test.TEST_ID.RUN_RIGHT_DRIVE;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_INTAKE;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_KICKER;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_CLAMP_JAWS;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_OPEN_JAWS;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_LIFT_JAWS;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_LOWER_JAWS;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_ABUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_BBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_XBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_YBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_LEFTBUMPER;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_RIGHTBUMPER;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_BACKBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_STARTBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_CENTER1BUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_CENTER2BUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV0;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV45;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV90;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV135;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV180;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV225;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV270;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_POV315;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_LEFTTRIGGERBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_RIGHTTRIGGERBUTTON;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_LEFTJOYSTICKX;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_LEFTJOYSTICKY;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_RIGHTJOYSTICKX;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_RIGHTJOYSTICKY;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_LEFTTRIGGER;
+            Test.TEST_ID testId = Test.TEST_ID.RUN_GAMEPAD_RIGHTTRIGGER;
+            */
 
             ArcadeDrive drive = new ArcadeDrive();
             BallHandler mechanism = new BallHandler();
@@ -54,7 +85,7 @@ namespace AerialAssist
                 CTRE.Phoenix.Watchdog.Feed(); // keep feed the watchdow to enable the motors
                 if ( testHW )
                 {
-                    test.Run(Test.TEST_ID.RUN_LEFT_DRIVE);
+                    test.Run(testId);
                 }
                 else
                 {
