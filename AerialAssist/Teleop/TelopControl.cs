@@ -49,11 +49,8 @@ namespace HeroDemoBots.AerialAssist.Teleop
         }
 
         private DragonGamePad m_gamepad;
-        private IDragonGamePad.AXIS_IDENTIFIER[]   m_axisIDs;
-        private IDragonGamePad.BUTTON_IDENTIFIER[] m_buttonIDs;
-
-
-        //==================================================================================
+        private IDragonGamePad.AXIS_IDENTIFIER[]   m_axisIDs = new IDragonGamePad.AXIS_IDENTIFIER[(int) FUNCTION_IDENTIFIER.MAX_FUNCTIONS ];
+        private IDragonGamePad.BUTTON_IDENTIFIER[] m_buttonIDs = new IDragonGamePad.BUTTON_IDENTIFIER[(int)FUNCTION_IDENTIFIER.MAX_FUNCTIONS];
         /// <summary>
         /// Method:         GetInstance
         /// Description:    Create a singleton object for mapping functionality to controller
